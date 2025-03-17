@@ -1,12 +1,27 @@
+syntax = "proto3";
+
+package inventory;
+
+// Definição do serviço InventoryService
 service InventoryService {
-    rpc SearchAllProducts(Empty) returns (ProductsResponse) {}
-    rpc SearchProductByID(Payload) returns (ProductResponse) {}
+    rpc SearchAllProducts (Empty) returns (ProductsResponse);
+    rpc SearchProductByID (Payload) returns (ProductResponse);
 }
 
+// Mensagem vazia para requisições sem parâmetros
+message Empty {}
+
+// Mensagem de entrada para busca de um produto por ID
 message Payload {
     int32 id = 1;
 }
 
+// Mensagem de resposta contendo uma lista de produtos
+message ProductsResponse {
+    repeated ProductResponse products = 1;
+}
+
+// Estrutura de um produto
 message ProductResponse {
     int32 id = 1;
     string name = 2;
